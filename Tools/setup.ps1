@@ -42,7 +42,7 @@ $ismoProp = @{
 
 $ConfigurationConditions = @{
     Minimum = "1.0"
-    ForceBootstrap = $true
+    # ForceBootstrap = $true
 }
 if ($PSVersionTable.PSVersion.Major -ge 5) {
     # PSv4 does not have the `-AllowClobber` parameter
