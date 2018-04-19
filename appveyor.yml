@@ -1,10 +1,14 @@
+environment:
+  matrix:
+      - APPVEYOR_BUILD_WORKER_IMAGE: WMF 4
+      - APPVEYOR_BUILD_WORKER_IMAGE: Ununtu
 version: 1.2.{build}
-image: Visual Studio 2017
 init:
 - ps: |
     Install-Package Configuration -Provider PowerShellGet -Minimum 1.0 -Force -ForceBootstrap
     Install-Package Pester -Provider PowerShellGet -Minimum 4.0 -Force -SkipPublisherCheck
 install:
+- ps: . ./Tools/setup.ps1
 - ps: |
     .\Build.ps1 -Step Clean, Update -Verbose
 nuget:
