@@ -33,3 +33,30 @@ if (-not ($gallery.Trusted)) {
     Write-Host "Trusting PSGallery"
     # Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted -ErrorAction SilentlyContinue
 }
+
+$ismoProp = @{
+    Scope = "CurrentUser"
+    # ErrorAction = "Stop"
+    Force = $true
+}
+
+$ConfigurationConditions = @{
+    Minimum = "1.0"
+    ForceBootstrap = $true
+}
+if ($PSVersionTable.PSVersion.Major -ge 5) {
+    # PSv4 does not have the `-AllowClobber` parameter
+    $ConfigurationConditions["SkipPublisherCheck"] = $true
+}
+Write-Host "Installing Configuration"
+Install-Module "Configuration" @ismoProp @ConfigurationConditions
+
+$pesterConditions = @{
+    Minimum = "4.0"
+}
+if ($PSVersionTable.PSVersion.Major -ge 5) {
+    # PSv4 does not have the `-SkipPublisherCheck` parameter
+    $pesterConditions["SkipPublisherCheck"] = $true
+}
+Write-Host "Installing Pester"
+Install-Module "Pester" @ismoProp @pesterConditions

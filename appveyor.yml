@@ -5,9 +5,7 @@ environment:
 version: 1.2.{build}
 install:
 - ps: |
-    . ./Tools/setup.ps1
-    Install-Package Configuration -Provider PowerShellGet -Minimum 1.0 -Force -ForceBootstrap
-    Install-Package Pester -Provider PowerShellGet -Minimum 4.0 -Force -SkipPublisherCheck
+    ./Tools/setup.ps1
     ./Build.ps1 -Step Clean, Update -Verbose
 nuget:
   disable_publish_on_pr: true
